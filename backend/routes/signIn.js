@@ -21,14 +21,17 @@ router.post("/", async (req, res) => {
         if (!user)
             return res.status(400).send("Invalid email or password");
         
-        const validpassword = await bcrypt.compate(req.body.password, user.password)
+        const validpassword = await bcrypt.compare(req.body.password, user.password)
         if (!validpassword) 
             return res.status(400).send("Invalid email or password");
 
         const secretKey = process.env.SECRET_KEY;
-        const token = jwt.sign({_id: user._id, name: user.name, email: user.email}, secretKey) 
-        
-        res.send(token)
+        const token = jwt.sign(
+          { _id: user._id, name: user.name, email: user.email },
+          secretKey
+        );
+
+        res.send(token);
     } catch (error) {
         res.status(500).send(error.message);
         console.log(error.message);
