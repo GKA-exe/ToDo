@@ -117,9 +117,3 @@ router.delete("/:id", async (req, res) => {
 
 
 module.exports = router;
-
-//user model
-//sign up: hash password => public
-//signin => JWT => public
-//protect api's => middleware => authorization
-

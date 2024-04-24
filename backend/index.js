@@ -2,13 +2,16 @@ const express = require('express')
 const mongoose = require("mongoose");
 const cors = require('cors')
 const todos = require("./routes/todos")
+const signUp = require("./routes/signUp")
 
 require("dotenv").config();
 const app = express()
 
 app.use(cors());
 app.use(express.json())
+
 app.use("/api/todos", todos)
+app.use("/api/signUp", signUp)
 
 app.get("/", (req, res) => {
     res.send("Welcome to ToDos API")

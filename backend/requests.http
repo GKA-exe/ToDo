@@ -1,7 +1,21 @@
-POST http://localhost:5000/api/todos
+Post http://localhost:5000/api/signUp HTTP/1.1
 Content-Type: application/json
+
 {
-    "name": "Our First Todo",
-    "auth": "Krishna",
-    "isComplete": false
+    "name": "Anirudh",
+    "email": "anirudh@gmail.com",
+    "password": "12345678"
+}
+
+###
+GET http://localhost:5000/api/todos
+
+###
+Post http://localhost:5000/api/signin HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Anirudh",
+    "email": "anirudh@gmail.com",
+    "password": "12345678"
 }
