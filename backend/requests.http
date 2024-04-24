@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/todos
+Content-Type: application/json
+{
+    "name": "Our First Todo",
+    "auth": "Krishna",
+    "isComplete": false
+}
