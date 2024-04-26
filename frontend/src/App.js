@@ -5,17 +5,22 @@ import Todos from './components/todos/Todos';
 import NavBar from './components/navBar/NavBar';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-
+import { Container } from '@mui/material';
+import "./App.js"
 function App() {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/signin" Component={SignIn} />
-          <Route path="/signup" Component={SignUp} />
-          <Route path="/" Component={Todos} />
-        </Routes>
+        <Container maxWidth="md">
+          <NavBar />
+          <Container className="content-style">
+            <Routes>
+              <Route path="/signin" Component={SignIn} />
+              <Route path="/signup" Component={SignUp} />
+              <Route path="/" Component={Todos} />
+            </Routes>
+          </Container>
+        </Container>
       </BrowserRouter>
     </>
   );
