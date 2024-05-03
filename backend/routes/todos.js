@@ -6,18 +6,16 @@ const router = express.Router()
 
 
 //GET requests
-router.get("/", auth, async(req, res) => {  
-    try {
-        const todos = await Todo.find()
-            .sort({ date: -1 });
-        console.log(req.user)
-        res.send(todos);
-    } catch (error) {
-        res.status(500).send(error.message)
-        console.log(error.message)
-
-    }
-})
+router.get("/", async (req, res) => {
+  try {
+    const todos = await Todo.find().sort({ date: -1 });
+    console.log(req.user);
+    res.send(todos);
+  } catch (error) {
+    res.status(500).send(error.message);
+    console.log(error.message);
+  }
+});
 
 //POST requests
 router.post("/", async (req, res) => {
@@ -29,7 +27,7 @@ router.post("/", async (req, res) => {
         date: Joi.date()
     })
 
-    const {error } = schema.validate(req.body)
+    const {error} = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
     const {name, author, isComplete, date, uid} = req.body
