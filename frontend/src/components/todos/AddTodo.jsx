@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux"
-
+import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import "./AddTodo.css";
@@ -8,28 +8,28 @@ import "./AddTodo.css";
 import { addTodo } from "../../store/actions/todoActions";
 
 function AddTodo() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [todo, setTodo] = useState({
     name: "",
     isComplete: false,
-  })
+    author: "Krishna",
+  });
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addTodo(todo));
+    let addToDoRes = await axios.post("http://localhost:5000/api/todos", todo);
     setTodo({
       name: "",
       isComplete: false,
-    })
-  }
+      author: "Krishna",
+    });
+    // dispatch(addTodo(todo));0
+  };
 
   return (
     <>
-      <form className="form-style"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
+      <form className="form-style" autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           id="enter-todo"
           variant="outlined"
@@ -37,7 +37,9 @@ function AddTodo() {
           autoFocus
           fullWidth
           value={todo.name}
-          onChange={(e) => setTodo({...todo, name: e.target.value, date: new Date()})}
+          onChange={(e) =>
+            setTodo({ ...todo, name: e.target.value, date: new Date() })
+          }
         />
         <Button
           className="submit-button"
@@ -45,7 +47,6 @@ function AddTodo() {
           variant="contained"
           type="submit"
           endIcon={<SendIcon />}
-          onChange={(e) => setTodo({...todo, name: e.target.value})}
         ></Button>
       </form>
     </>

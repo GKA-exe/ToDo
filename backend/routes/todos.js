@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
         todo = await todo.save();
         res.send(todo)
     } catch (error){
-        res.status(500).send(error.message);
+        res.send(error.message);
         console.log(error.message)
     }
 })
